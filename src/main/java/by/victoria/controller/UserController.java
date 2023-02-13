@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,8 +20,8 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public Principal login(Principal user) {
-        return user;
+    public Integer login() {
+        return 1;
     }
 
     @GetMapping
