@@ -67,8 +67,10 @@ public class ResumeController {
 
     @Secured({"ROLE_RECRUITER"})
     @GetMapping("/to-send")
-    public List<Resume> findToSend() {
-        return resumeService.findToSend();
+    public List<ResumeDto> findToSend() {
+        List<Resume> toSend = resumeService.findToSend();
+
+        return resumeMapper.toResumeDtoList(toSend);
     }
 
     @Secured({"ROLE_RECRUITER"})

@@ -162,7 +162,7 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     private void throwIfNoAccess(User user, Long resumeId) {
-        boolean exist = userService.getAuthenticated()
+        boolean exist = user
                 .getResumes()
                 .stream()
                 .map(Resume::getId)
