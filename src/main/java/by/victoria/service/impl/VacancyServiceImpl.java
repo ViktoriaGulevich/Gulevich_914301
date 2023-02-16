@@ -93,7 +93,7 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     private void throwIfNoAccess(User user, Long vacancyId) {
-        boolean exist = userService.getAuthenticated()
+        boolean exist = user
                 .getVacancies()
                 .stream()
                 .map(Vacancy::getId)

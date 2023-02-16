@@ -81,7 +81,7 @@ public class User {
     public void addResumeToSend(Resume resume) {
         toSends = Objects.requireNonNullElseGet(toSends, HashSet::new);
 
-        favorites.remove(resume);
+        deleteFromFavorites(resume);
 
         toSends.add(resume);
     }
@@ -93,6 +93,9 @@ public class User {
     }
 
     public void deleteFromFavorites(Resume resume) {
+        if (favorites==null){
+            return;
+        }
         if (!favorites.contains(resume)) {
             return;
         }
@@ -100,11 +103,14 @@ public class User {
     }
 
     public void deleteFromSend(Resume resume) {
+        if (toSends==null){
+            return;
+        }
         if (!toSends.contains(resume)) {
             return;
         }
         toSends.remove(resume);
-        favorites.add(resume);
+        addResumeToFavorites(resume);
     }
 
     public void addResume(Resume resume) {
