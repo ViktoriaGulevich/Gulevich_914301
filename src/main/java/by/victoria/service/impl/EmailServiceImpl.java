@@ -37,6 +37,6 @@ public class EmailServiceImpl implements EmailService {
 
                     return message;
                 })
-                .forEach(emailSender::send);
+                .forEach(simpleMessage -> emailSender.send(simpleMessage));
     }
 }

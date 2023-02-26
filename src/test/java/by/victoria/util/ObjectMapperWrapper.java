@@ -8,11 +8,6 @@ import org.springframework.test.web.servlet.MvcResult;
 public class ObjectMapperWrapper {
 
     @SneakyThrows
-    public static String toString(ObjectMapper objectMapper, Object object) {
-        return objectMapper.writeValueAsString(object);
-    }
-
-    @SneakyThrows
     public static <T> T toObject(ObjectMapper objectMapper, MvcResult result, TypeReference<T> typeReference) {
         return objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
     }
