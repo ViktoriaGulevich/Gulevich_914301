@@ -26,7 +26,8 @@ public class ExceptionController {
     public ResponseExceptionDto validateDataException(RuntimeException e) {
         return new ResponseExceptionDto(e.getMessage());
     }
-    @ExceptionHandler({ DateTimeParseException.class})
+
+    @ExceptionHandler({DateTimeParseException.class})
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ResponseBody
     public ResponseExceptionDto validateDateTimeException(DateTimeParseException e) {
@@ -63,5 +64,12 @@ public class ExceptionController {
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.joining("<br>")));
+    }
+
+    @ExceptionHandler({Exception.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseExceptionDto validateException(Exception e) {
+        return new ResponseExceptionDto(e.getMessage());
     }
 }

@@ -16,12 +16,7 @@ public abstract class FilterMapper {
     private KeySkillMapper keySkillMapper;
 
     public Predicate<Resume> toFilter(FilterDto filterDto) {
-        Predicate<Resume> filter = new Predicate<Resume>() {
-            @Override
-            public boolean test(Resume resume) {
-                return true;
-            }
-        };
+        Predicate<Resume> filter = resume -> true;
         if (filterDto == null) {
             return filter;
         }

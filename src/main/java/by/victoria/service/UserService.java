@@ -8,4 +8,6 @@ public interface UserService {
     User getAuthenticated();
 
     void save(User user);
+
+    User getUserByResumeId(Long resumeId);
 }

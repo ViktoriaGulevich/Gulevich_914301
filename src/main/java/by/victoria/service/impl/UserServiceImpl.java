@@ -25,9 +25,9 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByLogin(user.getLogin())) {
             throw new DuplicateException("User with login " + user.getLogin() + " already exists");
         }
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new DuplicateException("User with email " + user.getEmail() + " already exists");
-        }
+//        if (userRepository.existsByEmail(user.getEmail())) {
+//            throw new DuplicateException("User with email " + user.getEmail() + " already exists");
+//        }
         Role role = roleRepository.findByName("USER").orElseThrow(() ->
                 new NotFoundException("Can't find role with name = USER")
         );
@@ -46,5 +46,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         userRepository.save(user);
+    }
+
+    @Override
+    public User getUserByResumeId(Long resumeId) {
+        return userRepository.findAllUserById(resumeId)
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("Нет резюме с id = " + resumeId));
     }
 }
