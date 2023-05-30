@@ -47,7 +47,7 @@ public class UserController {
         User user = userMapper.toUser(userDto);
 
         if (emailService.checkCode(user, code)) {
-            userService.create(user);
+            userService.create(user, userDto.isRecruiter());
         } else {
             throw new RuntimeException("Неверный код");
         }

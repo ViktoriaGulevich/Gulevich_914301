@@ -1,8 +1,6 @@
 package by.victoria.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -35,4 +33,11 @@ public class UserDto {
     private Long resumeId;
 
     private Long vacancyId;
+
+    @Getter(AccessLevel.NONE)
+    private Boolean isRecruiter;
+
+    public Boolean isRecruiter() {
+        return isRecruiter != null && isRecruiter;
+    }
 }

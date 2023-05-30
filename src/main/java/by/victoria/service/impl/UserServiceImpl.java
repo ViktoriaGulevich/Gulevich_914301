@@ -21,17 +21,23 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void create(User user) {
+    public void create(User user, boolean isRecruiter) {
         if (userRepository.existsByLogin(user.getLogin())) {
             throw new DuplicateException("User with login " + user.getLogin() + " already exists");
         }
 //        if (userRepository.existsByEmail(user.getEmail())) {
 //            throw new DuplicateException("User with email " + user.getEmail() + " already exists");
 //        }
-        Role role = roleRepository.findByName("USER").orElseThrow(() ->
-                new NotFoundException("Can't find role with name = USER")
-        );
-
+        Role role;
+        if (isRecruiter) {
+            role = roleRepository.findByName("RECRUITER").orElseThrow(() ->
+                    new NotFoundException("Can't find role with name = RECRUITER")
+            );
+        } else {
+            role = roleRepository.findByName("USER").orElseThrow(() ->
+                    new NotFoundException("Can't find role with name = USER")
+            );
+        }
         user = userSecurityService.encodePassword(user);
         user.addRole(role);
 
